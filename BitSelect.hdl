@@ -1,0 +1,112 @@
+CHIP BitSelect {
+
+    IN
+        in[16],
+        sel[4];
+
+    OUT
+        out;
+
+    PARTS:
+    Not(in=sel[0],out=nsel0);
+    Not(in=sel[1],out=nsel1);
+    Not(in=sel[2],out=nsel2);
+    Not(in=sel[3],out=nsel3);
+
+    And(a=in[0],b=nsel0,out=a0);
+    And(a=a0,b=nsel1,out=b0);
+    And(a=b0,b=nsel2,out=c0);
+    And(a=c0,b=nsel3,out=d0);
+
+    And(a=in[1],b=sel[0],out=a1);
+    And(a=a1,b=nsel1,out=b1);
+    And(a=b1,b=nsel2,out=c1);
+    And(a=c1,b=nsel3,out=d1);
+
+    And(a=in[2],b=nsel0,out=a2);
+    And(a=a2,b=sel[1],out=b2);
+    And(a=b2,b=nsel2,out=c2);
+    And(a=c2,b=nsel3,out=d2);
+
+    And(a=in[3],b=sel[0],out=a3);
+    And(a=a3,b=sel[1],out=b3);
+    And(a=b3,b=nsel2,out=c3);
+    And(a=c3,b=nsel3,out=d3);
+
+    And(a=in[4],b=nsel0,out=a4);
+    And(a=a4,b=nsel1,out=b4);
+    And(a=b4,b=sel[2],out=c4);
+    And(a=c4,b=nsel3,out=d4);
+
+    And(a=in[5],b=sel[0],out=a5);
+    And(a=a5,b=nsel1,out=b5);
+    And(a=b5,b=sel[2],out=c5);
+    And(a=c5,b=nsel3,out=d5);
+
+    And(a=in[6],b=nsel0,out=a6);
+    And(a=a6,b=sel[1],out=b6);
+    And(a=b6,b=sel[2],out=c6);
+    And(a=c6,b=nsel3,out=d6);
+
+    And(a=in[7],b=sel[0],out=a7);
+    And(a=a7,b=sel[1],out=b7);
+    And(a=b7,b=sel[2],out=c7);
+    And(a=c7,b=nsel3,out=d7);
+
+    And(a=in[8],b=nsel0,out=a8);
+    And(a=a8,b=nsel1,out=b8);
+    And(a=b8,b=nsel2,out=c8);
+    And(a=c8,b=sel[3],out=d8);
+
+    And(a=in[9],b=sel[0],out=a9);
+    And(a=a9,b=nsel1,out=b9);
+    And(a=b9,b=nsel2,out=c9);
+    And(a=c9,b=sel[3],out=d9);
+
+    And(a=in[10],b=nsel0,out=a10);
+    And(a=a10,b=sel[1],out=b10);
+    And(a=b10,b=nsel2,out=c10);
+    And(a=c10,b=sel[3],out=d10);
+
+    And(a=in[11],b=sel[0],out=a11);
+    And(a=a11,b=sel[1],out=b11);
+    And(a=b11,b=nsel2,out=c11);
+    And(a=c11,b=sel[3],out=d11);
+
+    And(a=in[12],b=nsel0,out=a12);
+    And(a=a12,b=nsel1,out=b12);
+    And(a=b12,b=sel[2],out=c12);
+    And(a=c12,b=sel[3],out=d12);
+
+    And(a=in[13],b=sel[0],out=a13);
+    And(a=a13,b=nsel1,out=b13);
+    And(a=b13,b=sel[2],out=c13);
+    And(a=c13,b=sel[3],out=d13);
+
+    And(a=in[14],b=nsel0,out=a14);
+    And(a=a14,b=sel[1],out=b14);
+    And(a=b14,b=sel[2],out=c14);
+    And(a=c14,b=sel[3],out=d14);
+
+    And(a=in[15],b=sel[0],out=a15);
+    And(a=a15,b=sel[1],out=b15);
+    And(a=b15,b=sel[2],out=c15);
+    And(a=c15,b=sel[3],out=d15);
+
+    Or(a=d0,b=d1,out=o1);
+    Or(a=o1,b=d2,out=o2);
+    Or(a=o2,b=d3,out=o3);
+    Or(a=o3,b=d4,out=o4);
+    Or(a=o4,b=d5,out=o5);
+    Or(a=o5,b=d6,out=o6);
+    Or(a=o6,b=d7,out=o7);
+    Or(a=o7,b=d8,out=o8);
+    Or(a=o8,b=d9,out=o9);
+    Or(a=o9,b=d10,out=o10);
+    Or(a=o10,b=d11,out=o11);
+    Or(a=o11,b=d12,out=o12);
+    Or(a=o12,b=d13,out=o13);
+    Or(a=o13,b=d14,out=o14);
+    Or(a=o14,b=d15,out=out);
+
+}
