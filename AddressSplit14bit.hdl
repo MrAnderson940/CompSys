@@ -1,0 +1,20 @@
+CHIP AddressSplit14bit {
+    IN Address[14];
+    OUT MostSignificant[2], LessSignifcant[12];
+
+    PARTS:
+    And(a=Address[0],b=true,out=LessSignifcant[0]);
+    And(a=Address[1],b=true,out=LessSignifcant[1]);
+    And(a=Address[2],b=true,out=LessSignifcant[2]);
+    And(a=Address[3],b=true,out=LessSignifcant[3]);
+    And(a=Address[4],b=true,out=LessSignifcant[4]);
+    And(a=Address[5],b=true,out=LessSignifcant[5]);
+    And(a=Address[6],b=true,out=LessSignifcant[6]);
+    And(a=Address[7],b=true,out=LessSignifcant[7]);
+    And(a=Address[8],b=true,out=LessSignifcant[8]);
+    And(a=Address[9],b=true,out=LessSignifcant[9]);
+    And(a=Address[10],b=true,out=LessSignifcant[10]);
+    And(a=Address[11],b=true,out=LessSignifcant[11]);
+    And(a=Address[12],b=true,out=MostSignificant[0]);
+    And(a=Address[13],b=true,out=MostSignificant[1]);
+}

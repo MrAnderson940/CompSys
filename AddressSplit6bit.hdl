@@ -1,0 +1,12 @@
+CHIP AddressSplit6bit {
+    IN address[6];
+    OUT mostSignificant[3], LessSignifcant[3];
+
+    PARTS:
+    And(a=address[0],b=true,out=LessSignifcant[0]);
+    And(a=address[1],b=true,out=LessSignifcant[1]);
+    And(a=address[2],b=true,out=LessSignifcant[2]);
+    And(a=address[3],b=true,out=mostSignificant[0]);
+    And(a=address[4],b=true,out=mostSignificant[1]);
+    And(a=address[5],b=true,out=mostSignificant[2]);
+}

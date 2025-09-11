@@ -1,0 +1,21 @@
+CHIP BitSplit1 {
+    IN In[15];
+    OUT MSB[2], LSB14[14], LSB13[13];
+
+    PARTS:
+    And(a=In[14],b=true,out=MSB[1]);
+    And(a=In[13],b=true,out=LSB14[13],out=MSB[0]);
+    And(a=In[12],b=true,out=LSB14[12],out=LSB13[12]);
+    And(a=In[11],b=true,out=LSB14[11],out=LSB13[11]);
+    And(a=In[10],b=true,out=LSB14[10],out=LSB13[10]);
+    And(a=In[9],b=true,out=LSB14[9],out=LSB13[9]);
+    And(a=In[8],b=true,out=LSB14[8],out=LSB13[8]);
+    And(a=In[7],b=true,out=LSB14[7],out=LSB13[7]);
+    And(a=In[6],b=true,out=LSB14[6],out=LSB13[6]);
+    And(a=In[5],b=true,out=LSB14[5],out=LSB13[5]);
+    And(a=In[4],b=true,out=LSB14[4],out=LSB13[4]);
+    And(a=In[3],b=true,out=LSB14[3],out=LSB13[3]);
+    And(a=In[2],b=true,out=LSB14[2],out=LSB13[2]);
+    And(a=In[1],b=true,out=LSB14[1],out=LSB13[1]);
+    And(a=In[0],b=true,out=LSB14[0],out=LSB13[0]);
+}
