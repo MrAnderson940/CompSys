@@ -3,10 +3,15 @@
 
 // Put your code here.
 
+
+
+
+
 @1
 D=M
-@6
+@7
 D;JGT
+@1
 D=D-M
 D=D-M
 @0
