@@ -30,6 +30,15 @@ D;JEQ
 D=M
 A=D
 D=M
+@33
+D;JGE
+@0
+D=M
+@33
+D;JLE
+@1
+A=D
+D=M
 @0
 D=D-M
 @33
