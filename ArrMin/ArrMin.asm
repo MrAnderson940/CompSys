@@ -29,12 +29,12 @@ D;JEQ
 @0
 D=M
 @28
-D;JLT
+D;JLE
 @1
 A=D
 D=M
 @36
-D;JLT
+D;JGE
 @1
 D=M
 A=D
