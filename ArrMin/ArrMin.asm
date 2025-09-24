@@ -31,11 +31,11 @@ D=M
 A=D
 D=M
 @42
-D;JGE
+D;JLE
 @0
 D=M
 @42
-D;JLE
+D;JGE
 @1
 A=D
 D=M
