@@ -11,7 +11,7 @@
 M=0
 @2
 D=M
-@end
+@44
 D;JLE
 @1
 D=M
@@ -24,12 +24,12 @@ M=M+1
 @2
 M=M-1
 D=M
-@end
+@44
 D;JEQ
 @0
 D=M
 @28
-D;JGT
+D;JLT
 @1
 A=D
 D=M
