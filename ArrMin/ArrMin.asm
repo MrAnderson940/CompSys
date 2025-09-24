@@ -12,7 +12,7 @@ M=0
 @2
 D=M
 @end
-D;JEQ
+D;JLE
 @1
 D=M
 A=D
