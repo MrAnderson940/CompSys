@@ -34,7 +34,7 @@ D;JLE
 A=D
 D=M
 @36
-D;JGE
+D;JLE
 @1
 D=M
 A=D
