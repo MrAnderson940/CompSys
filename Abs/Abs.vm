@@ -1,0 +1,20 @@
+// Calculates y = |x|
+// x & y are static variables
+
+// Put your code here.
+push static 0
+push constant 0
+lt
+if-goto ng
+push static 0
+goto re
+label ng
+push static 0
+neg
+goto re 
+label re
+pop static 1
+
+
+label END
+goto END
