@@ -3,3 +3,41 @@
 
 // Put your code here.
 
+function Fib.fib 1
+push constant 1
+pop local 0
+
+push constant 0
+push argument 0
+eq
+not 
+if-goto nzr
+push constant 0
+pop local 0
+label nzr
+
+
+push argument 0
+push constant 1
+gt
+not
+if-goto finish
+
+push argument 0
+push constant 1
+sub 
+call Fib.fib 1
+
+push argument 0
+push constant 2
+sub 
+call Fib.fib 1
+
+add
+pop local 0
+
+label finish
+
+push local 0
+return
+
