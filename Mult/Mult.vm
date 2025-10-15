@@ -3,6 +3,92 @@
 // x & y are static variables
 
 // Put your code here.
+push static 0
+push constant 0
+lt
+push static 1
+push constant 0
+lt
+eq
+pop temp 0
+
+push static 0
+push constant 0
+lt
+if-goto ng1
+push static 0
+goto re1
+label ng1
+push static 0
+neg
+goto re1 
+label re1
+pop temp 1
+
+push static 1
+push constant 0
+lt
+if-goto ng2
+push static 1
+goto re2
+label ng2
+push static 1
+neg
+goto re2 
+label re2
+pop temp 2
+
+push temp 1
+push temp 2
+gt
+if-goto small
+push temp 1
+pop temp 3
+push temp 2
+pop temp 1
+push temp 3
+pop temp 2
+goto small
+label small
+push temp 1
+pop temp 3
+
+push temp 2
+push constant 0
+eq
+not
+if-goto nzr
+push constant 0
+pop local 0
+goto END
+label nzr
+
+label loop
+push temp 2
+push constant 1
+sub
+pop temp 2
+push temp 2
+push constant 0
+eq
+if-goto done
+push temp 1
+push temp 3
+add
+pop temp 1
+goto loop
+
+label done
+push temp 0
+if-goto pos
+push temp 1
+neg 
+pop local 0
+goto END
+label pos
+push temp 1
+pop local 0
+goto END
 
 
 
