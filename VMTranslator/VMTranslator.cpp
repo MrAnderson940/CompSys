@@ -53,7 +53,7 @@ string VMTranslator::vm_push(string segment, int offset){
 
     if (segment == "static" || segment == "pointer" || segment == "constant" || segment == "temp"){
         output.append("@" + reggester + "\n");
-        output.append("push " + segment + " " + offs + "\n");
+        //output.append("push " + segment + " " + offs + "\n");
         if (segment == "constant"){
             output.append("D=A\n");
         } else {
