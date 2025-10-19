@@ -164,22 +164,22 @@ std::string VMTranslator::vm_eq(){
     output.append("D=M\n");
     output.append("A=A-1\n");
     output.append("D=M-D\n");
-    output.append("@EQ.true" + Nlable + "\n");
+    output.append("@EQ.true_" + Nlable + "\n");
     output.append("D;JEQ\n");
     output.append("@0\n");
     output.append("D=A\n");
     output.append("@SP\n");
     output.append("A=M-1\n");
     output.append("M=D\n");
-    output.append("@EQ.comp" + Nlable + "\n");
+    output.append("@EQ.comp_" + Nlable + "\n");
     output.append("0;JMP\n");
-    output.append("(EQ.true" + Nlable + ")\n");
+    output.append("(EQ.true_" + Nlable + ")\n");
     output.append("@0\n");
     output.append("D=A-1\n");
     output.append("@SP\n");
     output.append("A=M-1\n");
     output.append("M=D\n");    
-    output.append("(EQ.comp" + Nlable + ")\n");
+    output.append("(EQ.comp_" + Nlable + ")\n");
     return output;
 }   
 
@@ -194,14 +194,14 @@ std::string VMTranslator::vm_gt(){
     output.append("D=M\n");
     output.append("A=A-1\n");
     output.append("D=M-D\n");
-    output.append("@true" + Nlable + "\n");
+    output.append("@true_" + Nlable + "\n");
     output.append("D;JGT\n");
     output.append("@0\n");
     output.append("D=A\n");
     output.append("@SP\n");
     output.append("A=M-1\n");
     output.append("M=D\n");
-    output.append("@comp" + Nlable + "\n");
+    output.append("@comp_" + Nlable + "\n");
     output.append("0;JMP\n");
     output.append("(true" + Nlable + ")\n");
     output.append("@0\n");
@@ -209,7 +209,7 @@ std::string VMTranslator::vm_gt(){
     output.append("@SP\n");
     output.append("A=M-1\n");
     output.append("M=D\n");    
-    output.append("(comp" + Nlable + ")\n");
+    output.append("(comp_" + Nlable + ")\n");
     return output;
 }
 
