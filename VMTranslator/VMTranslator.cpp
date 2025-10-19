@@ -171,7 +171,7 @@ std::string VMTranslator::vm_eq(){
     output.append("@SP\n");
     output.append("A=M-1\n");
     output.append("M=D\n");
-    output.append("@EQ.comp_" + Nlable + "\n");
+    output.append("@EQ.skip_" + Nlable + "\n");
     output.append("0;JMP\n");
     output.append("(EQ.true_" + Nlable + ")\n");
     output.append("@0\n");
@@ -179,7 +179,7 @@ std::string VMTranslator::vm_eq(){
     output.append("@SP\n");
     output.append("A=M-1\n");
     output.append("M=D\n");    
-    output.append("(EQ.comp_" + Nlable + ")\n");
+    output.append("(EQ.skip_" + Nlable + ")\n");
     return output;
 }   
 
