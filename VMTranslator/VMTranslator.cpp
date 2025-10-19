@@ -160,7 +160,7 @@ string VMTranslator::vm_eq(){
     output.append("A=A-1\n");
     output.append("D=D-M\n");
     output.append("@true\n");
-    output.append("D;JEQ\n");
+    output.append("D;JNE\n");
     output.append("@0\n");
     output.append("D=A\n");
     output.append("@SP\n");
