@@ -188,7 +188,7 @@ string VMTranslator::vm_gt(){
     output.append("A=A-1\n");
     output.append("D=D-M\n");
     output.append("@true\n");
-    output.append("D;JGT\n");
+    output.append("D;JLT\n");
     output.append("@0\n");
     output.append("D=A\n");
     output.append("@SP\n");
