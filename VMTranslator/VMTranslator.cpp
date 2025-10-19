@@ -21,42 +21,33 @@ VMTranslator::~VMTranslator() {
 /** Generate Hack Assembly code for a VM push operation */
 string VMTranslator::vm_push(string segment, int offset){
     string output, reggester;
-    strtig offs = to_string(offset);
+    string offs = to_string(offset);
 
-    switch segment {
-        case "static":
+    if (segment ==  "static"){
         reggester = to_string(16+offset);
-        break;
-
-        case "pointer":
+    
+    } else if (segment == "pointer"){
         reggester = "R" + to_string(3+offset);
-        break;
-
-        case "this":
+        
+    } else if (segment == "this"){
         reggester = "THIS";
-        break;
-
-        case "that":
+    
+    } else if (segment == "that"){
         reggester = "THAT";
-        break;
-
-        case "argument":
+        
+    } else if (segment == "argument"){
         reggester = "ARG";
-        break;
-
-        case "local":
+        
+    } else if (segment == "local"){
         reggester = "LCL";
-        break;
-
-        case "temp":
+        
+    } else if (segment == "temp"){
         reggester = "R" + to_string(5+offset);
-        break;
-
-        case "constant":
+        
+    } else if (segment == "constant"){
         reggester = to_string(offset);
-        break;
-
-        default
+        
+    } else {
         return "";
     }
 
@@ -76,7 +67,7 @@ string VMTranslator::vm_push(string segment, int offset){
         output.append("D=M\n");
     }
 
-    output.append("@SP\n")
+    output.append("@SP\n");
     output.append("A=M\n");
     output.append("M=D\n");
     output.append("@SP\n");
@@ -88,42 +79,33 @@ string VMTranslator::vm_push(string segment, int offset){
 /** Generate Hack Assembly code for a VM pop operation */
 string VMTranslator::vm_pop(string segment, int offset){    
     string output, reggester;
-    strtig offs = to_string(offset);
+    string offs = to_string(offset);
 
-    switch segment {
-        case "static":
+    if (segment ==  "static"){
         reggester = to_string(16+offset);
-        break;
-
-        case "pointer":
+    
+    } else if (segment == "pointer"){
         reggester = "R" + to_string(3+offset);
-        break;
-
-        case "this":
+        
+    } else if (segment == "this"){
         reggester = "THIS";
-        break;
-
-        case "that":
+    
+    } else if (segment == "that"){
         reggester = "THAT";
-        break;
-
-        case "argument":
+        
+    } else if (segment == "argument"){
         reggester = "ARG";
-        break;
-
-        case "local":
+        
+    } else if (segment == "local"){
         reggester = "LCL";
-        break;
-
-        case "temp":
+        
+    } else if (segment == "temp"){
         reggester = "R" + to_string(5+offset);
-        break;
-
-        case "constant":
+        
+    } else if (segment == "constant"){
         reggester = to_string(offset);
-        break;
-
-        default
+        
+    } else {
         return "";
     }
     
@@ -131,7 +113,7 @@ string VMTranslator::vm_pop(string segment, int offset){
 
     if (segment == "static" || segment == "pointer" || segment == "temp"){
         output.append("D=A\n");
-    } else if (segment == "this" || segment == "that" || segment == "argument" || argument == "local"){
+    } else if (segment == "this" || segment == "that" || segment == "argument" || segment == "local"){
         output.append("D=M\n");
         output.append("@" + offs + "\n");
         output.append("D=D+A\n");
@@ -151,7 +133,15 @@ string VMTranslator::vm_pop(string segment, int offset){
 
 /** Generate Hack Assembly code for a VM add operation */
 string VMTranslator::vm_add(){
-    return "";
+    string output;
+
+    output.append("@SP\n");
+    output.append("AM=M-1\n");
+    output.append("M=D\n");
+    output.append("A=A-1\n");
+    output.append("M=D+M\n");
+
+    return output;    
 }
 
 /** Generate Hack Assembly code for a VM sub operation */
@@ -166,12 +156,50 @@ string VMTranslator::vm_neg(){
 
 /** Generate Hack Assembly code for a VM eq operation */
 string VMTranslator::vm_eq(){
-    return "";
-}
+    string output;
+
+    output.append("@SP\n");
+    output.append("AM=M-1\n");
+    output.append("D=M\n");
+    output.append("A=A-1\n");
+    output.append("D=D-M\n");
+    output.append("@true\n");
+    output.append("D;JEQ\n");
+    output.append("@SP\n");
+    output.append("A=A-1\n");
+    output.append("M=0\n");
+    output.append("@false");
+    output.append("0;JMP\n");
+    output.append("(true)\n");
+    output.append("@SP\n");
+    output.append("A=A-1\n");
+    output.append("M=-1\n");
+    output.append("(false)\n");
+
+    return output;
+}   
 
 /** Generate Hack Assembly code for a VM gt operation */
 string VMTranslator::vm_gt(){
-    return "";
+    string output;
+
+    output.append("@SP\n");
+    output.append("AM=M-1\n");
+    output.append("D=M\n");
+    output.append("A=A-1\n");
+    output.append("D=D-M\n");
+    output.append("@true\n");
+    output.append("D;JGT\n");
+    output.append("@SP\n");
+    output.append("A=A-1\n");
+    output.append("M=0\n");
+    output.append("@false");
+    output.append("0;JMP\n");
+    output.append("(true)\n");
+    output.append("@SP\n");
+    output.append("A=A-1\n");
+    output.append("M=-1\n");
+    output.append("(false)\n");
 }
 
 /** Generate Hack Assembly code for a VM lt operation */
@@ -196,17 +224,30 @@ string VMTranslator::vm_not(){
 
 /** Generate Hack Assembly code for a VM label operation */
 string VMTranslator::vm_label(string label){
-    return "";
+    string output = "(" + label + ")\n";
+    return output;
 }
 
 /** Generate Hack Assembly code for a VM goto operation */
 string VMTranslator::vm_goto(string label){
-    return "";
+    string output;
+    output.append("@" + label + "\n");
+    output.append("0;JMP\n");
+
+    return output;
 }
 
 /** Generate Hack Assembly code for a VM if-goto operation */
 string VMTranslator::vm_if(string label){
-    return "";
+    string output;
+
+    output.append("@SP\n");
+    output.append("AM=M-1\n");
+    output.append("D=M\n");
+    output.append("@" + label + "\n");
+    output.append("D;JNE\n");
+
+    return output;
 }
 
 /** Generate Hack Assembly code for a VM function operation */

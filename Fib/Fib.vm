@@ -7,9 +7,9 @@ function Fib.fib 1
 push constant 1
 pop local 0
 
-push constant 0
+push constant 1
 push argument 0
-eq
+gt
 not 
 if-goto nzr
 push constant 0
