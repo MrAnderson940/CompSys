@@ -157,8 +157,8 @@ string VMTranslator::vm_eq(){
     output.append("@SP\n");
     output.append("AM=M-1\n");
     output.append("D=M\n");
-    output.append("A=A-1");
-    output.append("D=D-M");
+    output.append("A=A-1\n");
+    output.append("D=D-M\n");
     output.append("@true\n");
     output.append("D;JEQ\n");
     output.append("@0\n");
