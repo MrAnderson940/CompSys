@@ -263,15 +263,118 @@ std::string VMTranslator::vm_if(std::string label){
 
 /** Generate Hack Assembly code for a VM function operation */
 std::string VMTranslator::vm_function(std::string function_name, int n_vars){
-    return "";
+    std::string output;
+
+    output.append(function_name + "\n");
+    output.append("@SP\n");
+    output.append("A=M\n");
+    for (int i=0; i<n_vars; i++){
+        output.append("M=0\n");
+        output.append("A=A+1\n");
+
+    }
+    output.append("D=A\n");
+    output.append("@SP\n");
+    output.append("M=D\n");
+    return output;
 }
 
 /** Generate Hack Assembly code for a VM call operation */
 std::string VMTranslator::vm_call(std::string function_name, int n_args){
-    return "";
+    std::string output, Nlabel;
+    VMTranslator NL;
+    Nlabel = NL.newLabel();
+
+    output.append("@SP\n");
+    output.append("D=M\n");
+    output.append("@R13\n");
+    output.append("M=D\n");
+    output.append("@ret_" + Nlabel + "\n");
+    output.append("D=A\n");
+    output.append("@SP\n");
+    output.append("A=M\n");
+    output.append("M=D\n");
+    output.append("@SP\n");
+    output.append("M=M+1");
+    output.append("@LCL\n");
+    output.append("D=M\n");
+    output.append("@SP\n");
+    output.append("A=M\n");
+    output.append("M=D\n");
+    output.append("@SP\n");
+    output.append("M=M+1\n");
+    output.append("@ARG\n");
+    output.append("D=M\n");
+    output.append("@SP\n");
+    output.append("A=M\n");
+    output.append("M=D\n");
+    output.append("@SP\n");
+    output.append("M=M+1");
+    output.append("@THIS\n");
+    output.append("D=M\n");
+    output.append("@SP\n");
+    output.append("A=M\n");
+    output.append("M=D\n");
+    output.append("@SP\n");
+    output.append("M=M+1\n");
+    output.append("@THAT\n");
+    output.append("D=M\n");
+    output.append("@SP\n");
+    output.append("A=M\n");
+    output.append("M=D\n");
+    output.append("@SP\n");
+    output.append("M=M+1\n");
+    output.append("@R13\n");
+    output.append("D=M\n");
+    output.append("@" + std::to_string(n_args) + "\n");
+    output.append("D=D-A\n");
+    output.append("@ARG\n");
+    output.append("M=D\n");
+    output.append("@SP\n");
+    output.append("D=M\n");
+    output.append("@LCL\n");
+    output.append("M=D\n");
+    output.append("@" + function_name + "\n");
+    output.append("0;JMP\n");
+    output.append("(ret_" + Nlabel + ")\n");
+
+    return output;
 }
 
 /** Generate Hack Assembly code for a VM return operation */
 std::string VMTranslator::vm_return(){
-    return "";
+    std::string output;
+
+    output.append("@LCL\n");
+    output.append("D=M\n");
+    output.append("@5\n");
+    output.append("A=D-A\n");
+    output.append("D=M\n");
+    output.append("@13\n");
+    output.append("M=D\n");
+    output.append("@SP\n");
+    output.append("M=D\n");
+    output.append("D=A+1\n");
+    output.append("@SP\n");
+    output.append("M=D\n");
+    output.append("@LCL\n");
+    output.append("AM=M-1\n");
+    output.append("D=M\n");
+    output.append("@THAT\n");
+    output.append("M=D\n");
+    output.append("LCL\n");
+    output.append("AM=M-1\n");
+    output.append("D=M\n");
+    output.append("@THIS\n");
+    output.append("M=D\n");
+    output.append("@LCL\n");
+    output.append("A=M-1\n");
+    output.append("D=M\n");
+    output.append("@LCL\n");
+    output.append("M=D\n");
+    output.append("@R13\n");
+    output.append("A=M\n");
+    output.append("0;JMP");
+
+    return output;
 }
