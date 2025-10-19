@@ -158,7 +158,7 @@ string VMTranslator::vm_eq(){
     output.append("AM=M-1\n");
     output.append("D=M\n");
     output.append("A=A-1\n");
-    output.append("D=D-M\n");
+    output.append("D=M-D\n");
     output.append("@true\n");
     output.append("D;JEQ\n");
     output.append("@0\n");
@@ -186,9 +186,9 @@ string VMTranslator::vm_gt(){
     output.append("AM=M-1\n");
     output.append("D=M\n");
     output.append("A=A-1\n");
-    output.append("D=D-M\n");
+    output.append("D=M-D\n");
     output.append("@true\n");
-    output.append("D;JLT\n");
+    output.append("D;JGT\n");
     output.append("@0\n");
     output.append("D=A\n");
     output.append("@SP\n");
