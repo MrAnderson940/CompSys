@@ -5,11 +5,14 @@
 
 class VMTranslator {
     private:
+        int labels;
 
     public:
 
         VMTranslator();
         ~VMTranslator();
+
+        std::string newLabel();
 
         // all of these
         static std::string vm_push(std::string segment, int offset);
