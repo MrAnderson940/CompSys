@@ -374,7 +374,5 @@ std::string VMTranslator::vm_return(){
     output.append("M=D\n");
     output.append("@R13\n");
     output.append("A=M\n");
-    output.append("0;JMP");
-
     return output;
 }
