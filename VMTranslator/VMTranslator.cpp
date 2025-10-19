@@ -102,9 +102,6 @@ string VMTranslator::vm_pop(string segment, int offset){
     } else if (segment == "temp"){
         reggester = "R" + to_string(5+offset);
         
-    } else if (segment == "constant"){
-        reggester = to_string(offset);
-        
     } else {
         return "";
     }
