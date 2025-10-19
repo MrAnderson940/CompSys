@@ -136,7 +136,6 @@ string VMTranslator::vm_add(){
     string output;
 
     output.append("@SP\n");
-    output.append("AM=M-1\n");
     output.append("M=D\n");
     output.append("A=A-1\n");
     output.append("M=D+M\n");
@@ -200,6 +199,8 @@ string VMTranslator::vm_gt(){
     output.append("A=A-1\n");
     output.append("M=-1\n");
     output.append("(false)\n");
+
+    return output;
 }
 
 /** Generate Hack Assembly code for a VM lt operation */
