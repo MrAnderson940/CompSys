@@ -53,7 +53,6 @@ string VMTranslator::vm_push(string segment, int offset){
 
     if (segment == "static" || segment == "pointer" || segment == "constant" || segment == "temp"){
         output.append("@" + reggester + "\n");
-        //output.append("push " + segment + " " + offs + "\n");
         if (segment == "constant"){
             output.append("D=A\n");
         } else {
@@ -158,21 +157,24 @@ string VMTranslator::vm_eq(){
     output.append("@SP\n");
     output.append("AM=M-1\n");
     output.append("D=M\n");
-    output.append("A=A-1\n");
-    output.append("D=D-M\n");
+    output.append("A=A-1");
+    output.append("D=D-M");
     output.append("@true\n");
     output.append("D;JEQ\n");
+    output.append("@0\n");
+    output.append("D=A\n");
     output.append("@SP\n");
-    output.append("A=A-1\n");
-    output.append("M=0\n");
-    output.append("@false");
+    output.append("A=M-1\n");
+    output.append("M=D\n");
+    output.append("@comp\n");
     output.append("0;JMP\n");
     output.append("(true)\n");
+    output.append("@0\n");
+    output.append("D=A-1\n");
     output.append("@SP\n");
-    output.append("A=A-1\n");
-    output.append("M=-1\n");
-    output.append("(false)\n");
-
+    output.append("A=M-1\n");
+    output.append("M=D\n");    
+    output.append("(comp)\n");
     return output;
 }   
 
