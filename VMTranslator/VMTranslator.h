@@ -3,43 +3,44 @@
 
 #include <string>
 
-using namespace std;
-
 class VMTranslator {
+    private:
+        int lables;
 
     public:
+        std::string newLable();
 
         VMTranslator();
         ~VMTranslator();
 
         // all of these
-        static string vm_push(string segment, int offset);
-        static string vm_pop(string segment, int offset);
+        static std::string vm_push(std::string segment, int offset);
+        static std::string vm_pop(std::string segment, int offset);
 
 
         // one of these
-        static string vm_add();
-        static string vm_sub();
-        static string vm_neg();
+        static std::string vm_add();
+        static std::string vm_sub();
+        static std::string vm_neg();
 
 
         // 2 of these 
-        static string vm_eq();
-        static string vm_gt();
-        static string vm_lt();
-        static string vm_and();
-        static string vm_or();
-        static string vm_not();
+        static std::string vm_eq();
+        static std::string vm_gt();
+        static std::string vm_lt();
+        static std::string vm_and();
+        static std::string vm_or();
+        static std::string vm_not();
 
         // all of these
-        static string vm_label(string label);
-        static string vm_goto(string label);
-        static string vm_if(string label);
+        static std::string vm_label(std::string label);
+        static std::string vm_goto(std::string label);
+        static std::string vm_if(std::string label);
 
         // all of these
-        static string vm_function(string function_name, int n_vars);
-        static string vm_call(string function_name, int n_args);
-        static string vm_return();
+        static std::string vm_function(std::string function_name, int n_vars);
+        static std::string vm_call(std::string function_name, int n_args);
+        static std::string vm_return();
         
 };
 

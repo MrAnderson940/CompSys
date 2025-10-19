@@ -1,14 +1,11 @@
-#include <string>
-
 #include "VMTranslator.h"
 
-using namespace std;
 
 /**
  * VMTranslator constructor
  */
 VMTranslator::VMTranslator() {
-    // Your code here
+    lables = 0;
 }
 
 /**
@@ -18,16 +15,22 @@ VMTranslator::~VMTranslator() {
     // Your code here
 }
 
+std::string VMTranslator::newLable(){
+    lables++;
+    std::string output = "_avoid" + std::to_string(lables);
+    return output;
+}
+
 /** Generate Hack Assembly code for a VM push operation */
-string VMTranslator::vm_push(string segment, int offset){
-    string output, reggester;
-    string offs = to_string(offset);
+std::string VMTranslator::vm_push(std::string segment, int offset){
+    std::string output, reggester;
+    std::string offs = std::to_string(offset);
 
     if (segment ==  "static"){
-        reggester = to_string(16+offset);
+        reggester = std::to_string(16+offset);
     
     } else if (segment == "pointer"){
-        reggester = "R" + to_string(3+offset);
+        reggester = "R" + std::to_string(3+offset);
         
     } else if (segment == "this"){
         reggester = "THIS";
@@ -42,10 +45,10 @@ string VMTranslator::vm_push(string segment, int offset){
         reggester = "LCL";
         
     } else if (segment == "temp"){
-        reggester = "R" + to_string(5+offset);
+        reggester = "R" + std::to_string(5+offset);
         
     } else if (segment == "constant"){
-        reggester = to_string(offset);
+        reggester = std::to_string(offset);
         
     } else {
         return "";
@@ -76,15 +79,15 @@ string VMTranslator::vm_push(string segment, int offset){
 }
 
 /** Generate Hack Assembly code for a VM pop operation */
-string VMTranslator::vm_pop(string segment, int offset){    
-    string output, reggester;
-    string offs = to_string(offset);
+std::string VMTranslator::vm_pop(std::string segment, int offset){    
+    std::string output, reggester;
+    std::string offs = std::to_string(offset);
 
     if (segment ==  "static"){
-        reggester = to_string(16+offset);
+        reggester = std::to_string(16+offset);
     
     } else if (segment == "pointer"){
-        reggester = "R" + to_string(3+offset);
+        reggester = "R" + std::to_string(3+offset);
         
     } else if (segment == "this"){
         reggester = "THIS";
@@ -99,7 +102,7 @@ string VMTranslator::vm_pop(string segment, int offset){
         reggester = "LCL";
         
     } else if (segment == "temp"){
-        reggester = "R" + to_string(5+offset);
+        reggester = "R" + std::to_string(5+offset);
         
     } else {
         return "";
@@ -128,8 +131,8 @@ string VMTranslator::vm_pop(string segment, int offset){
 }
 
 /** Generate Hack Assembly code for a VM add operation */
-string VMTranslator::vm_add(){
-    string output;
+std::string VMTranslator::vm_add(){
+    std::string output;
 
     output.append("@SP\n");
     output.append("AM=M-1\n");
@@ -141,100 +144,104 @@ string VMTranslator::vm_add(){
 }
 
 /** Generate Hack Assembly code for a VM sub operation */
-string VMTranslator::vm_sub(){
+std::string VMTranslator::vm_sub(){
     return "";
 }
 
 /** Generate Hack Assembly code for a VM neg operation */
-string VMTranslator::vm_neg(){
+std::string VMTranslator::vm_neg(){
     return "";
 }
 
 /** Generate Hack Assembly code for a VM eq operation */
-string VMTranslator::vm_eq(){
-    string output;
+std::string VMTranslator::vm_eq(){
+    std::string output;
+    std::string lable;
+    VMTranslator NL;
+    lable = NL.newLable();
 
     output.append("@SP\n");
     output.append("AM=M-1\n");
     output.append("D=M\n");
     output.append("A=A-1\n");
     output.append("D=M-D\n");
-    output.append("@true\n");
+    output.append("@true" + lable + "\n");
     output.append("D;JEQ\n");
     output.append("@0\n");
     output.append("D=A\n");
     output.append("@SP\n");
     output.append("A=M-1\n");
     output.append("M=D\n");
-    output.append("@comp\n");
+    output.append("@comp" + lable + "\n");
     output.append("0;JMP\n");
-    output.append("(true)\n");
+    output.append("(true" + lable + ")\n");
     output.append("@0\n");
     output.append("D=A-1\n");
     output.append("@SP\n");
     output.append("A=M-1\n");
     output.append("M=D\n");    
-    output.append("(comp)\n");
+    output.append("(comp" + lable + ")\n");
     return output;
 }   
 
 /** Generate Hack Assembly code for a VM gt operation */
-string VMTranslator::vm_gt(){
-    string output;
+std::string VMTranslator::vm_gt(){
+    std::string output;
+    std::string lable = 
 
     output.append("@SP\n");
     output.append("AM=M-1\n");
     output.append("D=M\n");
     output.append("A=A-1\n");
     output.append("D=M-D\n");
-    output.append("@true\n");
+    output.append("@true" + lable + "\n");
     output.append("D;JGT\n");
     output.append("@0\n");
     output.append("D=A\n");
     output.append("@SP\n");
     output.append("A=M-1\n");
     output.append("M=D\n");
-    output.append("@comp\n");
+    output.append("@comp" + lable + "\n");
     output.append("0;JMP\n");
-    output.append("(true)\n");
+    output.append("(true" + lable + ")\n");
     output.append("@0\n");
     output.append("D=A-1\n");
     output.append("@SP\n");
     output.append("A=M-1\n");
     output.append("M=D\n");    
-    output.append("(comp)\n");
+    output.append("(comp" + lable + ")\n");
     return output;
 }
 
 /** Generate Hack Assembly code for a VM lt operation */
-string VMTranslator::vm_lt(){
+std::string VMTranslator::vm_lt(){
     return "";
 }
 
 /** Generate Hack Assembly code for a VM and operation */
-string VMTranslator::vm_and(){
+std::string VMTranslator::vm_and(){
     return "";
 }
 
 /** Generate Hack Assembly code for a VM or operation */
-string VMTranslator::vm_or(){
+std::string VMTranslator::vm_or(){
     return "";
 }
 
 /** Generate Hack Assembly code for a VM not operation */
-string VMTranslator::vm_not(){
+std::string VMTranslator::vm_not(){
     return "";
 }
 
 /** Generate Hack Assembly code for a VM label operation */
-string VMTranslator::vm_label(string label){
-    string output = "(" + label + ")\n";
+std::string VMTranslator::vm_label(std::string label){
+    std::string output = "(" + label + ")\n";
     return output;
 }
 
 /** Generate Hack Assembly code for a VM goto operation */
-string VMTranslator::vm_goto(string label){
-    string output;
+std::string VMTranslator::vm_goto(std::string label){
+    std::string output;
     output.append("@" + label + "\n");
     output.append("0;JMP\n");
 
@@ -242,8 +249,8 @@ string VMTranslator::vm_goto(string label){
 }
 
 /** Generate Hack Assembly code for a VM if-goto operation */
-string VMTranslator::vm_if(string label){
-    string output;
+std::string VMTranslator::vm_if(std::string label){
+    std::string output;
 
     output.append("@SP\n");
     output.append("AM=M-1\n");
@@ -255,16 +262,16 @@ string VMTranslator::vm_if(string label){
 }
 
 /** Generate Hack Assembly code for a VM function operation */
-string VMTranslator::vm_function(string function_name, int n_vars){
+std::string VMTranslator::vm_function(std::string function_name, int n_vars){
     return "";
 }
 
 /** Generate Hack Assembly code for a VM call operation */
-string VMTranslator::vm_call(string function_name, int n_args){
+std::string VMTranslator::vm_call(std::string function_name, int n_args){
     return "";
 }
 
 /** Generate Hack Assembly code for a VM return operation */
-string VMTranslator::vm_return(){
+std::string VMTranslator::vm_return(){
     return "";
 }
