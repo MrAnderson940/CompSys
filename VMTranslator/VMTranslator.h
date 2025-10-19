@@ -26,6 +26,7 @@ class VMTranslator {
 
 
         // 2 of these 
+        // half working
         static std::string vm_eq();
         static std::string vm_gt();
         static std::string vm_lt();
@@ -38,7 +39,8 @@ class VMTranslator {
         static std::string vm_goto(std::string label);
         static std::string vm_if(std::string label);
 
-        // all of these
+        // all of these 
+        //not working
         static std::string vm_function(std::string function_name, int n_vars);
         static std::string vm_call(std::string function_name, int n_args);
         static std::string vm_return();
