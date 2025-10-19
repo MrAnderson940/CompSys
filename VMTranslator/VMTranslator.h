@@ -5,10 +5,8 @@
 
 class VMTranslator {
     private:
-        int lables;
 
     public:
-        std::string newLable();
 
         VMTranslator();
         ~VMTranslator();

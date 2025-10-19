@@ -5,7 +5,6 @@
  * VMTranslator constructor
  */
 VMTranslator::VMTranslator() {
-    lables = 0;
 }
 
 /**
@@ -15,11 +14,6 @@ VMTranslator::~VMTranslator() {
     // Your code here
 }
 
-std::string VMTranslator::newLable(){
-    lables++;
-    std::string output = "_avoid" + std::to_string(lables);
-    return output;
-}
 
 /** Generate Hack Assembly code for a VM push operation */
 std::string VMTranslator::vm_push(std::string segment, int offset){
@@ -156,60 +150,56 @@ std::string VMTranslator::vm_neg(){
 /** Generate Hack Assembly code for a VM eq operation */
 std::string VMTranslator::vm_eq(){
     std::string output;
-    std::string lable;
-    VMTranslator NL;
-    lable = NL.newLable();
 
     output.append("@SP\n");
     output.append("AM=M-1\n");
     output.append("D=M\n");
     output.append("A=A-1\n");
     output.append("D=M-D\n");
-    output.append("@true" + lable + "\n");
+    output.append("@EQ.true\n");
     output.append("D;JEQ\n");
     output.append("@0\n");
     output.append("D=A\n");
     output.append("@SP\n");
     output.append("A=M-1\n");
     output.append("M=D\n");
-    output.append("@comp" + lable + "\n");
+    output.append("@EQ.comp\n");
     output.append("0;JMP\n");
-    output.append("(true" + lable + ")\n");
+    output.append("(EQ.true)\n");
     output.append("@0\n");
     output.append("D=A-1\n");
     output.append("@SP\n");
     output.append("A=M-1\n");
     output.append("M=D\n");    
-    output.append("(comp" + lable + ")\n");
+    output.append("(EQ.comp)\n");
     return output;
 }   
 
 /** Generate Hack Assembly code for a VM gt operation */
 std::string VMTranslator::vm_gt(){
     std::string output;
-    std::string lable = 
 
     output.append("@SP\n");
     output.append("AM=M-1\n");
     output.append("D=M\n");
     output.append("A=A-1\n");
     output.append("D=M-D\n");
-    output.append("@true" + lable + "\n");
+    output.append("@true\n");
     output.append("D;JGT\n");
     output.append("@0\n");
     output.append("D=A\n");
     output.append("@SP\n");
     output.append("A=M-1\n");
     output.append("M=D\n");
-    output.append("@comp" + lable + "\n");
+    output.append("@comp\n");
     output.append("0;JMP\n");
-    output.append("(true" + lable + ")\n");
+    output.append("(true)\n");
     output.append("@0\n");
     output.append("D=A-1\n");
     output.append("@SP\n");
     output.append("A=M-1\n");
     output.append("M=D\n");    
-    output.append("(comp" + lable + ")\n");
+    output.append("(comp)\n");
     return output;
 }
 
