@@ -175,6 +175,9 @@ string VMTranslator::vm_eq(){
     output.append("A=M-1\n");
     output.append("M=D\n");    
     output.append("(comp)\n");
+    output.append("@SP\n");
+    output.append("A=M\n");
+    output.append("M=0\n");
     return output;
 }   
 
