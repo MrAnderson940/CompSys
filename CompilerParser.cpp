@@ -595,12 +595,19 @@ ParseTree* CompilerParser::compileExpressionList() {
  * Advance to the next token
  */
 void CompilerParser::next(){
-    it++;
-    
+    if (it != tokenList.end()){
+        it++;
+    } else {
+        throw ParseException();
+    }
 }
 
 void CompilerParser::prev(){
-    it--;
+    if (it != tokenList.begin()){
+        it--;
+    } else {
+        throw ParseException();
+    }
 }
 
 /**
