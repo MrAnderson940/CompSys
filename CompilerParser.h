@@ -11,6 +11,7 @@ class CompilerParser {
     public:
         std::list<Token*> tokenList;
         std::list<Token*>::iterator it;
+        int itNum;
         CompilerParser(std::list<Token*> tokens);
 
         ParseTree* compileProgram();

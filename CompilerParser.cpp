@@ -1,4 +1,5 @@
 #include "CompilerParser.h"
+#include <iostream>
 
 
 /**
@@ -6,8 +7,15 @@
  * @param tokens A linked list of tokens to be parsed
  */
 CompilerParser::CompilerParser(std::list<Token*> tokens) {
-    tokenList = tokens;
+    for (Token* t : tokens){
+        //std::cout << t->getType() << std::endl;
+        tokenList.push_back(t);   
+    }
+    //for (Token* t : tokenList){
+        //std::cout << t->getType() << std::endl;
+    //}
     it = tokens.begin();
+    itNum = 1;
 }
 
 /**
@@ -15,14 +23,22 @@ CompilerParser::CompilerParser(std::list<Token*> tokens) {
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileProgram() {
+    //std::cout << "0" << std::endl;
     if (have("keyword","class")){
+        //std::cout << "1" << std::endl;
         next();
+        //std::cout << "1a" << std::endl << current()->getType() << std::endl;
         if(current()->getType() == "identifier" || current()->getValue() == "Main" || current()->getValue() == "main"){
+            //std::cout << "1b" << std::endl;
             prev();
+            //std::cout << "2" << std::endl;
             ParseTree* pro = compileClass();
+           // std::cout << "3" << std::endl;
             return pro;
         } else {
+            //std::cout << "1c" << std::endl;
             throw ParseException();
+            return NULL;
         }
     }
     throw ParseException();
@@ -353,7 +369,7 @@ ParseTree* CompilerParser::compileLet() {
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileIf() {
-    ParseTree* nIf = new ParseTree("ifstatement","");
+    ParseTree* nIf = new ParseTree("ifStatement","");
     nIf->addChild(new ParseTree(current()->getType(),current()->getValue()));
     next();
 
@@ -595,19 +611,42 @@ ParseTree* CompilerParser::compileExpressionList() {
  * Advance to the next token
  */
 void CompilerParser::next(){
-    if (it != tokenList.end()){
-        it++;
-    } else {
-        throw ParseException();
+    int i = 0;
+    for (Token* t : tokenList){
+        
+        //std::cout << t->getType() << std::endl;
+        //std::cout << i << " " << itNum << std::endl;
+        if (i == itNum){
+            itNum++;
+            
+            //std::cout << (*it)->getType() << std::endl;
+            *it = t;
+           // std::cout << (*it)->getType() << std::endl;
+            return;
+        }
+        i++;
+        
     }
+    // if (it != tokenList.end()){
+    //     std::cout << (*it)->getType() << std::endl;
+    //     //++it;
+    //     std::cout << (*it)->getType() << std::endl;
+    // } else {
+    //     throw ParseException();
+    // }
 }
 
 void CompilerParser::prev(){
-    if (it != tokenList.begin()){
-        it--;
-    } else {
-        throw ParseException();
+    int i=0;
+    for (Token* t : tokenList){
+        if(i == itNum){
+            itNum--;
+            *it = t;
+            return;
+        }
+        i++;
     }
+
 }
 
 /**
@@ -615,7 +654,16 @@ void CompilerParser::prev(){
  * @return the Token
  */
 Token* CompilerParser::current(){
-    return *it;
+    if (it != tokenList.end()){
+        //std::cout << "5" << std::endl;
+        Token* t = *it;
+        //std::cout << "6" << std::endl;
+        //std::cout << "4" << t << std::endl;
+        return t;
+    } else{
+        throw ParseException();
+        return NULL;
+    }
 }
 
 /**
@@ -623,10 +671,14 @@ Token* CompilerParser::current(){
  * @return true if a match, false otherwise
  */
 bool CompilerParser::have(std::string expectedType, std::string expectedValue){
+    //std::cout << "4" << std::endl;
     Token* token = *it;
-    if (token->getType().compare(expectedType) && token->getValue().compare(expectedValue)){
+    //std::cout << token->getType() << " " << expectedType << " " << token->getValue() << " " << expectedValue << std::endl;
+    if (token->getType() == expectedType && token->getValue() == expectedValue){
+        //std::cout << "5" << std::endl;
         return true;
     } else {
+        //std::cout << "6" << std::endl;
         return false;
     }
 }
@@ -638,7 +690,7 @@ bool CompilerParser::have(std::string expectedType, std::string expectedValue){
  */
 Token* CompilerParser::mustBe(std::string expectedType, std::string expectedValue){
     Token* token = *it;
-    if (token->getType().compare(expectedType) && token->getValue().compare(expectedValue)){
+    if (token->getType() == expectedType && token->getValue() == expectedValue){
         it++;
         return token;
     } else{
