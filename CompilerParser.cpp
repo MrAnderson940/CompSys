@@ -50,7 +50,7 @@ ParseTree* CompilerParser::compileProgram() {
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileClass() {
-    ParseTree* nClass = new ParseTree("Class", "");
+    ParseTree* nClass = new ParseTree("class", "");
     nClass->addChild(new ParseTree(current()->getType(), current()->getValue()));
     next();
     nClass->addChild(new ParseTree(current()->getType(), current()->getValue()));
