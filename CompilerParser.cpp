@@ -140,7 +140,7 @@ ParseTree* CompilerParser::compileSubroutine() {
 
     if (current()->getType() != "identifier"){
         throw ParseException();
-        //return NULL;
+        return NULL;
     }
     nSubrutine->addChild(new ParseTree(current()->getType(),current()->getValue()));
     next();
@@ -220,7 +220,6 @@ ParseTree* CompilerParser::compileParameterList() {
             next();
             if (have("symbol",")")){
                 throw ParseException();
-                return NULL;
             }
         }
     }
