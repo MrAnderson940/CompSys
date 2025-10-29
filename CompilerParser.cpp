@@ -91,36 +91,36 @@ ParseTree* CompilerParser::compileClass() {
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileClassVarDec() {
-    // ParseTree* nClassVarDec = new ParseTree("classVarDoc","");
-    // nClassVarDec->addChild(new ParseTree(current()->getType(), current()->getValue()));
+    ParseTree* nClassVarDec = new ParseTree("classVarDoc","");
+    nClassVarDec->addChild(new ParseTree(current()->getType(), current()->getValue()));
 
-    // next();
-    // if(!have("keyword","int") && !have("keyword","char") && !have("keyword","boolean") && !(current()->getType() == "identifier")){
-    //     throw ParseException();
-    //     return NULL;
-    // }
-    // nClassVarDec->addChild(new ParseTree(current()->getType(), current()->getValue()));
-    // next();
+    next();
+    if(!have("keyword","int") && !have("keyword","char") && !have("keyword","boolean") && !(current()->getType() == "identifier")){
+        throw ParseException();
+        return NULL;
+    }
+    nClassVarDec->addChild(new ParseTree(current()->getType(), current()->getValue()));
+    next();
 
-    // while (it != tokenList.end() && have("symbol", ",")){
-    //     nClassVarDec->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    //     next();
+    while (it != tokenList.end() && have("symbol", ",")){
+        nClassVarDec->addChild(new ParseTree(current()->getType(),current()->getValue()));
+        next();
 
-    //     if (current()->getType() != "identifier"){
-    //         throw ParseException();
-    //         return NULL;
-    //     }
-    //     nClassVarDec->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    //     next();
-    // }
+        if (current()->getType() != "identifier"){
+            throw ParseException();
+            return NULL;
+        }
+        nClassVarDec->addChild(new ParseTree(current()->getType(),current()->getValue()));
+        next();
+    }
 
-    // if (!have("symbol",";")){
-    //     throw ParseException();
-    //     return NULL;
-    // }
-    // nClassVarDec->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    if (!have("symbol",";")){
+        throw ParseException();
+        return NULL;
+    }
+    nClassVarDec->addChild(new ParseTree(current()->getType(),current()->getValue()));
 
-    // return nClassVarDec;
+    return nClassVarDec;
     return NULL;
 }
 
