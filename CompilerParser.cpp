@@ -181,9 +181,10 @@ ParseTree* CompilerParser::compileParameterList() {
     if (!have("keyword","int") && !have("keyword","char") && !have("keyword","boolean") && !(current()->getType() == "identifier")){
         throw ParseException();
         return NULL;
+    } else if (current()->getType() != "identifier") {
+        nParameterList->addChild(new ParseTree(current()->getType(),current()->getValue()));
+        next();
     }
-    nParameterList->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next();
 
     if (current()->getType() != "identifier"){
         throw ParseException();
@@ -202,9 +203,10 @@ ParseTree* CompilerParser::compileParameterList() {
         if (!have("keyword","int") && !have("keyword","char") && !have("keyword","boolean") && !(current()->getType() == "identifier")){
             throw ParseException();
             return NULL;
+        } else if (current()->getType() != "identifier") {
+            nParameterList->addChild(new ParseTree(current()->getType(),current()->getValue()));
+            next();
         }
-        nParameterList->addChild(new ParseTree(current()->getType(),current()->getValue()));
-        next();
 
         if (current()->getType() != "identifier"){
             throw ParseException();
