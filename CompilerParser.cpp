@@ -30,7 +30,7 @@ ParseTree* CompilerParser::compileProgram() {
         //std::cout << "1a" << std::endl << current()->getType() << std::endl;
         if(current()->getType() == "identifier" || current()->getValue() == "Main" || current()->getValue() == "main"){
             //std::cout << "1b" << std::endl;
-            //prev();
+            prev();
             //std::cout << "2" << std::endl;
             ParseTree* pro = compileClass();
            // std::cout << "3" << std::endl;
@@ -653,9 +653,10 @@ void CompilerParser::next(){
 
 void CompilerParser::prev(){
     int i=0;
+    itNum--;
     for (Token* t : tokenList){
         if(i == itNum){
-            itNum--;
+            
             *it = t;
             return;
         }
