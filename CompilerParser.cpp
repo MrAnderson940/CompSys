@@ -129,49 +129,49 @@ ParseTree* CompilerParser::compileClassVarDec() {
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileSubroutine() {
-    // ParseTree* nSubrutine = new ParseTree("subrutine","");
-    // nSubrutine->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    // next();
+    ParseTree* nSubrutine = new ParseTree("subrutine","");
+    nSubrutine->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    next();
 
-    // if (current()->getType() != "keyword" && current()->getType() != "identifier"){
-    //     throw ParseException();
-    //     return NULL;
-    // }
-    // nSubrutine->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    // next();
+    if (current()->getType() != "keyword" && current()->getType() != "identifier"){
+        throw ParseException();
+        return NULL;
+    }
+    nSubrutine->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    next();
 
-    // if (current()->getType() != "identifier"){
-    //     throw ParseException();
-    //     return NULL;
-    // }
-    // nSubrutine->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    // next();
+    if (current()->getType() != "identifier"){
+        throw ParseException();
+        return NULL;
+    }
+    nSubrutine->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    next();
 
-    // if (!have("symbol","(")){
-    //     throw ParseException();
-    //     return NULL;
-    // }
-    // nSubrutine->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    // next();
+    if (!have("symbol","(")){
+        throw ParseException();
+        return NULL;
+    }
+    nSubrutine->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    next();
 
-    // if (!have("symbol",")")){
-    //     nSubrutine->addChild(compileParameterList());
-    // }
+    if (!have("symbol",")")){
+        nSubrutine->addChild(compileParameterList());
+    }
 
-    // if (!have("symbol",")")){
-    //     throw ParseException();
-    //     return NULL;
-    // }
-    // nSubrutine->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    // next();
+    if (!have("symbol",")")){
+        throw ParseException();
+        return NULL;
+    }
+    nSubrutine->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    next();
 
-    // if (!have("symbol","{")){
-    //     throw ParseException();
-    //     return NULL;
-    // }
-    // nSubrutine->addChild(compileSubroutineBody());
+    if (!have("symbol","{")){
+        throw ParseException();
+        return NULL;
+    }
+    nSubrutine->addChild(compileSubroutineBody());
 
-    // return nSubrutine;
+    return nSubrutine;
 
     return NULL;
 }
