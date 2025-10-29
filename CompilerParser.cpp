@@ -259,42 +259,43 @@ ParseTree* CompilerParser::compileSubroutineBody() {
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileVarDec() {
-    ParseTree* nVarDoc = new ParseTree("varDoc","");
-    nVarDoc->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next();
+    // ParseTree* nVarDoc = new ParseTree("varDoc","");
+    // nVarDoc->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // next();
 
-    if (!have("keyword","int") && !have("keyword","char") && !have("keyword","boolean") && current()->getType() != "identifier"){
-        throw ParseException();
-        return NULL;
-    }
-    nVarDoc->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next();
+    // if (!have("keyword","int") && !have("keyword","char") && !have("keyword","boolean") && current()->getType() != "identifier"){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nVarDoc->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // next();
 
-    if (current()->getType() != "identifier"){
-        throw ParseException();
-        return NULL;
-    }
-    nVarDoc->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next();
+    // if (current()->getType() != "identifier"){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nVarDoc->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // next();
 
-    while (it != tokenList.end() && have("symbol",",")){
-        nVarDoc->addChild(new ParseTree(current()->getType(),current()->getValue()));
-        next();
+    // while (it != tokenList.end() && have("symbol",",")){
+    //     nVarDoc->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //     next();
 
-        if (current()->getType() != "identifier"){
-            throw ParseException();
-            return NULL;
-        }
-        nVarDoc->addChild(new ParseTree(current()->getType(),current()->getValue()));
-        next();
-    }
+    //     if (current()->getType() != "identifier"){
+    //         throw ParseException();
+    //         return NULL;
+    //     }
+    //     nVarDoc->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //     next();
+    // }
 
-    if (!have("symbol",";")){
-        throw ParseException();
-        return NULL;
-    }
-    nVarDoc->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    return nVarDoc;
+    // if (!have("symbol",";")){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nVarDoc->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // return nVarDoc;
+    return NULL;
 }
 
 /**
