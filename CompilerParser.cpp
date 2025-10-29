@@ -50,38 +50,39 @@ ParseTree* CompilerParser::compileProgram() {
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileClass() {
-    ParseTree* nClass = new ParseTree("Class", "");
-    nClass->addChild(new ParseTree(current()->getType(), current()->getValue()));
-    next();
-    nClass->addChild(new ParseTree(current()->getType(), current()->getValue()));
-    next();
+    // ParseTree* nClass = new ParseTree("Class", "");
+    // nClass->addChild(new ParseTree(current()->getType(), current()->getValue()));
+    // next();
+    // nClass->addChild(new ParseTree(current()->getType(), current()->getValue()));
+    // next();
 
-    if(!have("symbol","{")){
-        throw ParseException();
-        return NULL;
-    }
-    nClass->addChild(new ParseTree(current()->getType(), current()->getValue()));
-    next();
+    // if(!have("symbol","{")){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nClass->addChild(new ParseTree(current()->getType(), current()->getValue()));
+    // next();
 
-    while (it != tokenList.end() && !have("symbol", "}")){
-        if (have("keyword","function") || have("keyword","method") || have("keyword","constructor")){
-            nClass->addChild(compileSubroutine());
-        } else if (have("keyword","static") || have("keyword","field")){
-            nClass->addChild(compileClassVarDec());
-        } else {
-            throw ParseException();
-            return NULL;
-        }
-        next();
-    }
+    // while (it != tokenList.end() && !have("symbol", "}")){
+    //     if (have("keyword","function") || have("keyword","method") || have("keyword","constructor")){
+    //         nClass->addChild(compileSubroutine());
+    //     } else if (have("keyword","static") || have("keyword","field")){
+    //         nClass->addChild(compileClassVarDec());
+    //     } else {
+    //         throw ParseException();
+    //         return NULL;
+    //     }
+    //     next();
+    // }
 
-    if (!have("symbol", "}")){
-        throw ParseException();
-        return NULL;
-    }
-    nClass->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // if (!have("symbol", "}")){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nClass->addChild(new ParseTree(current()->getType(),current()->getValue()));
 
-    return nClass;
+    // return nClass;
+    return NULL;
 
 }
 
@@ -90,36 +91,37 @@ ParseTree* CompilerParser::compileClass() {
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileClassVarDec() {
-    ParseTree* nClassVarDec = new ParseTree("classVarDoc","");
-    nClassVarDec->addChild(new ParseTree(current()->getType(), current()->getValue()));
+    // ParseTree* nClassVarDec = new ParseTree("classVarDoc","");
+    // nClassVarDec->addChild(new ParseTree(current()->getType(), current()->getValue()));
 
-    next();
-    if(!have("keyword","int") && !have("keyword","char") && !have("keyword","boolean") && !(current()->getType() == "identifier")){
-        throw ParseException();
-        return NULL;
-    }
-    nClassVarDec->addChild(new ParseTree(current()->getType(), current()->getValue()));
-    next();
+    // next();
+    // if(!have("keyword","int") && !have("keyword","char") && !have("keyword","boolean") && !(current()->getType() == "identifier")){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nClassVarDec->addChild(new ParseTree(current()->getType(), current()->getValue()));
+    // next();
 
-    while (it != tokenList.end() && have("symbol", ",")){
-        nClassVarDec->addChild(new ParseTree(current()->getType(),current()->getValue()));
-        next();
+    // while (it != tokenList.end() && have("symbol", ",")){
+    //     nClassVarDec->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //     next();
 
-        if (current()->getType() != "identifier"){
-            throw ParseException();
-            return NULL;
-        }
-        nClassVarDec->addChild(new ParseTree(current()->getType(),current()->getValue()));
-        next();
-    }
+    //     if (current()->getType() != "identifier"){
+    //         throw ParseException();
+    //         return NULL;
+    //     }
+    //     nClassVarDec->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //     next();
+    // }
 
-    if (!have("symbol",";")){
-        throw ParseException();
-        return NULL;
-    }
-    nClassVarDec->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // if (!have("symbol",";")){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nClassVarDec->addChild(new ParseTree(current()->getType(),current()->getValue()));
 
-    return nClassVarDec;
+    // return nClassVarDec;
+    return NULL;
 }
 
 /**
@@ -235,25 +237,26 @@ ParseTree* CompilerParser::compileParameterList() {
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileSubroutineBody() {
-    ParseTree* nSubrutineBody = new ParseTree("subrutineBody","");
-    nSubrutineBody->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next();
+    // ParseTree* nSubrutineBody = new ParseTree("subrutineBody","");
+    // nSubrutineBody->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // next();
 
-    while (it != tokenList.end() && !have("symbol","}")){
-        if (have("keyword", "var")){
-            nSubrutineBody->addChild(compileVarDec());
-            next();
-        } else {
-            nSubrutineBody->addChild(compileStatements());
-        }
-    }
+    // while (it != tokenList.end() && !have("symbol","}")){
+    //     if (have("keyword", "var")){
+    //         nSubrutineBody->addChild(compileVarDec());
+    //         next();
+    //     } else {
+    //         nSubrutineBody->addChild(compileStatements());
+    //     }
+    // }
 
-    if(!have("symbol","}")){
-        throw ParseException();
-        return NULL;
-    }
-    nSubrutineBody->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    return nSubrutineBody;
+    // if(!have("symbol","}")){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nSubrutineBody->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // return nSubrutineBody;
+    return NULL;
 }
 
 /**
@@ -305,22 +308,22 @@ ParseTree* CompilerParser::compileVarDec() {
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileStatements() {
-    ParseTree* nStatements = new ParseTree("statements","");
+    // ParseTree* nStatements = new ParseTree("statements","");
 
-    while (have("keyword","let") || have("keyword","while") || have("keyword","if") || have("keyword","do") || have("keyword","return")){
-        if (current()->getValue() == "let"){
-            nStatements->addChild(compileLet());
-        } else if (current()->getValue() == "while"){
-            nStatements->addChild(compileWhile());
-        } else if (current()->getValue() == "if"){
-            nStatements->addChild(compileIf());
-        } else if (current()->getValue() == "do"){
-            nStatements->addChild(compileDo());
-        } else {
-            nStatements->addChild(compileReturn());
-        }
-    }
-    return nStatements;
+    // while (have("keyword","let") || have("keyword","while") || have("keyword","if") || have("keyword","do") || have("keyword","return")){
+    //     if (current()->getValue() == "let"){
+    //         nStatements->addChild(compileLet());
+    //     } else if (current()->getValue() == "while"){
+    //         nStatements->addChild(compileWhile());
+    //     } else if (current()->getValue() == "if"){
+    //         nStatements->addChild(compileIf());
+    //     } else if (current()->getValue() == "do"){
+    //         nStatements->addChild(compileDo());
+    //     } else {
+    //         nStatements->addChild(compileReturn());
+    //     }
+    // }
+    // return nStatements;
 }
 
 /**
@@ -328,45 +331,45 @@ ParseTree* CompilerParser::compileStatements() {
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileLet() {
-    ParseTree* nLet = new ParseTree("letStatement","");
-    nLet->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next();
+    // ParseTree* nLet = new ParseTree("letStatement","");
+    // nLet->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // next();
 
-    if (current()->getType() != "identifier"){
-        throw ParseException();
-        return NULL;
-    }
-    nLet->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next();
+    // if (current()->getType() != "identifier"){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nLet->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // next();
 
-    if (have("symbol","[")){
-        nLet->addChild(new ParseTree(current()->getType(),current()->getValue()));
-        next();
-        nLet->addChild(compileExpression());
+    // if (have("symbol","[")){
+    //     nLet->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //     next();
+    //     nLet->addChild(compileExpression());
 
-        if (!have("symbol","]")){
-            throw ParseException();
-            return NULL;
-        }
-        nLet->addChild(new ParseTree(current()->getType(),current()->getValue()));
-        next();
-    }
+    //     if (!have("symbol","]")){
+    //         throw ParseException();
+    //         return NULL;
+    //     }
+    //     nLet->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //     next();
+    // }
 
-    if (!have("symbol","=")){
-        throw ParseException();
-        return NULL;
-    }
-    nLet->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next(); 
-    nLet->addChild(compileExpression());
+    // if (!have("symbol","=")){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nLet->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // next(); 
+    // nLet->addChild(compileExpression());
 
-    if (!have("symbol",";")){
-        throw ParseException();
-        return NULL;
-    }
-    nLet->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // if (!have("symbol",";")){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nLet->addChild(new ParseTree(current()->getType(),current()->getValue()));
 
-    return nLet;
+    // return nLet;
 }
 
 /**
@@ -374,100 +377,102 @@ ParseTree* CompilerParser::compileLet() {
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileIf() {
-    ParseTree* nIf = new ParseTree("ifStatement","");
-    nIf->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next();
+    // ParseTree* nIf = new ParseTree("ifStatement","");
+    // nIf->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // next();
 
-    if (!have("symbol","(")){
-        throw ParseException();
-        return NULL;
-    }
-    nIf->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next();
-    nIf->addChild(compileExpression());
+    // if (!have("symbol","(")){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nIf->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // next();
+    // nIf->addChild(compileExpression());
 
-    if (!have("symbol",")")){
-        throw ParseException();
-        return NULL;
-    }
-    nIf->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next();
+    // if (!have("symbol",")")){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nIf->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // next();
 
-    if (!have("symbol","{")){
-        throw ParseException();
-        return NULL;
-    }
-    nIf->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next();
-    nIf->addChild(compileStatements());
+    // if (!have("symbol","{")){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nIf->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // next();
+    // nIf->addChild(compileStatements());
 
-    if (!have("symbol","}")){
-        throw ParseException();
-        return NULL;
-    }
-    nIf->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next();
+    // if (!have("symbol","}")){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nIf->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // next();
 
-    if (!have("keyword","else")){
-        nIf->addChild(new ParseTree(current()->getType(),current()->getValue()));
-        next();
+    // if (!have("keyword","else")){
+    //     nIf->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //     next();
         
-        if (!have("symbol","{")){
-            throw ParseException();
-            return NULL;
-        }
-        nIf->addChild(new ParseTree(current()->getType(),current()->getValue()));
-        next();
-        nIf->addChild(compileStatements());
+    //     if (!have("symbol","{")){
+    //         throw ParseException();
+    //         return NULL;
+    //     }
+    //     nIf->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //     next();
+    //     nIf->addChild(compileStatements());
 
-        if (!have("symbol","}")){
-            throw ParseException();
-            return NULL;
-        }
-        nIf->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //     if (!have("symbol","}")){
+    //         throw ParseException();
+    //         return NULL;
+    //     }
+    //     nIf->addChild(new ParseTree(current()->getType(),current()->getValue()));
 
-    }
-    return nIf;
+    // }
+    // return nIf;
+    return NULL;
 }
 /**
  * Generates a parse tree for a while statement
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileWhile() {
-    ParseTree* nWhile = new ParseTree("whileStatement","");
-    nWhile->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next();
+    // ParseTree* nWhile = new ParseTree("whileStatement","");
+    // nWhile->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // next();
 
-    if (!have("symbol","(")){
-        throw ParseException();
-        return NULL;
-    }
-    nWhile->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next();
-    nWhile->addChild(compileExpression());
+    // if (!have("symbol","(")){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nWhile->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // next();
+    // nWhile->addChild(compileExpression());
 
-    if (!have("symbol",")")){
-        throw ParseException();
-        return NULL;
-    }
-    nWhile->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next();
+    // if (!have("symbol",")")){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nWhile->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // next();
 
-    if (!have("symbol","{")){
-        throw ParseException();
-        return NULL;
-    }
-    nWhile->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next();
-    nWhile->addChild(compileStatements());
+    // if (!have("symbol","{")){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nWhile->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // next();
+    // nWhile->addChild(compileStatements());
 
-    if (!have("symbol","}")){
-        throw ParseException();
-        return NULL;
-    }
-    nWhile->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // if (!have("symbol","}")){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nWhile->addChild(new ParseTree(current()->getType(),current()->getValue()));
 
-    return nWhile;
+    // return nWhile;
+    return NULL;
 }
 
 /**
@@ -475,18 +480,19 @@ ParseTree* CompilerParser::compileWhile() {
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileDo() {
-    ParseTree* nDo = new ParseTree("doStatement","");
-    nDo->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next();
-    nDo->addChild(compileExpression());
+    // ParseTree* nDo = new ParseTree("doStatement","");
+    // nDo->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // next();
+    // nDo->addChild(compileExpression());
 
-    if (!have("symbol",";")){
-        throw ParseException();
-        return NULL;
-    }
-    nDo->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // if (!have("symbol",";")){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nDo->addChild(new ParseTree(current()->getType(),current()->getValue()));
 
-    return nDo;
+    // return nDo;
+    return NULL;
 }
 
 /**
@@ -494,18 +500,19 @@ ParseTree* CompilerParser::compileDo() {
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileReturn() {
-    ParseTree* nReturn = new ParseTree("returnStatement","");
-    nReturn->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next();
-    nReturn->addChild(compileExpression());
+    // ParseTree* nReturn = new ParseTree("returnStatement","");
+    // nReturn->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // next();
+    // nReturn->addChild(compileExpression());
 
-    if (!have("symbol",";")){
-        throw ParseException();
-        return NULL;
-    }
-    nReturn->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // if (!have("symbol",";")){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nReturn->addChild(new ParseTree(current()->getType(),current()->getValue()));
 
-    return nReturn;
+    // return nReturn;
+    return NULL;
 }
 
 /**
@@ -513,31 +520,32 @@ ParseTree* CompilerParser::compileReturn() {
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileExpression() {
-    ParseTree* nExpression = new ParseTree("expression","");
+    // ParseTree* nExpression = new ParseTree("expression","");
 
-    if (have("keyword","skip")){
-        nExpression->addChild(new ParseTree(current()->getType(),current()->getValue()));
-        next();
-        return nExpression;
-    }
+    // if (have("keyword","skip")){
+    //     nExpression->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //     next();
+    //     return nExpression;
+    // }
 
-    while (it != tokenList.end()){
-        if (current()->getType() == "integerConstant"|| current()->getType() == "stringConstant"|| current()->getType() == "identifier" || current()->getType() == "keyword" || have("symbole","(")){
-            nExpression->addChild(compileTerm());
+    // while (it != tokenList.end()){
+    //     if (current()->getType() == "integerConstant"|| current()->getType() == "stringConstant"|| current()->getType() == "identifier" || current()->getType() == "keyword" || have("symbole","(")){
+    //         nExpression->addChild(compileTerm());
 
-        } else if (have("symbol","+") || have("symbol","-") || 
-            have("symbol","*") || have("symbol","/") || 
-            have("symbol","&") || have("symbol","|") || 
-            have("symbol","<") || have("symbol",">") || 
-            have("symbol","=")){
-                nExpression->addChild(new ParseTree(current()->getType(),current()->getValue()));
-                next(); 
-        } else {
-            break;
-        }
-    }
+    //     } else if (have("symbol","+") || have("symbol","-") || 
+    //         have("symbol","*") || have("symbol","/") || 
+    //         have("symbol","&") || have("symbol","|") || 
+    //         have("symbol","<") || have("symbol",">") || 
+    //         have("symbol","=")){
+    //             nExpression->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //             next(); 
+    //     } else {
+    //         break;
+    //     }
+    // }
 
-    return nExpression;
+    // return nExpression;
+    return NULL;
 }
 
 /**
@@ -545,50 +553,51 @@ ParseTree* CompilerParser::compileExpression() {
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileTerm() {
-    ParseTree* nTerm = new ParseTree("term","");
+    // ParseTree* nTerm = new ParseTree("term","");
     
-    if (have("symbol","(")){
-        nTerm->addChild(new ParseTree(current()->getType(),current()->getValue()));
-        next();
-        nTerm->addChild(compileExpression());
+    // if (have("symbol","(")){
+    //     nTerm->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //     next();
+    //     nTerm->addChild(compileExpression());
 
-        if (!have("symbol",")")){
-            throw ParseException();
-            return NULL;   
-        }
-        nTerm->addChild(new ParseTree(current()->getType(),current()->getValue()));
-        next();
-        return nTerm;
-    }
+    //     if (!have("symbol",")")){
+    //         throw ParseException();
+    //         return NULL;   
+    //     }
+    //     nTerm->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //     next();
+    //     return nTerm;
+    // }
 
-    while (it != tokenList.end()){
-        if (current()->getType() == "integerConstant"|| current()->getType() == "stringConstant"|| current()->getType() == "identifier" || current()->getType() == "keyword"){
-            nTerm->addChild(new ParseTree(current()->getType(),current()->getValue()));
-            next();
-        } else if (have("symbol",".")){
-            nTerm->addChild(new ParseTree(current()->getType(),current()->getValue()));
-            next();
+    // while (it != tokenList.end()){
+    //     if (current()->getType() == "integerConstant"|| current()->getType() == "stringConstant"|| current()->getType() == "identifier" || current()->getType() == "keyword"){
+    //         nTerm->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //         next();
+    //     } else if (have("symbol",".")){
+    //         nTerm->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //         next();
 
-            if(!have("symbol","(")){
-                throw ParseException();
-                return NULL;
-            }
-            nTerm->addChild(new ParseTree(current()->getType(),current()->getValue()));
-            next();
-            nTerm->addChild(compileExpressionList());
+    //         if(!have("symbol","(")){
+    //             throw ParseException();
+    //             return NULL;
+    //         }
+    //         nTerm->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //         next();
+    //         nTerm->addChild(compileExpressionList());
 
-            if (!have("symbol",")")){
-                throw ParseException();
-                return NULL;
-            }
-            nTerm->addChild(new ParseTree(current()->getType(),current()->getValue()));
-            next();
-        } else {
-            break;
-        }
-    }
+    //         if (!have("symbol",")")){
+    //             throw ParseException();
+    //             return NULL;
+    //         }
+    //         nTerm->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //         next();
+    //     } else {
+    //         break;
+    //     }
+    // }
 
-    return nTerm;
+    // return nTerm;
+    return NULL;
 
 }
 
@@ -597,19 +606,20 @@ ParseTree* CompilerParser::compileTerm() {
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileExpressionList() {
-    ParseTree* nExpressionList = new ParseTree("expressionList","");
+    // ParseTree* nExpressionList = new ParseTree("expressionList","");
 
-    while (it != tokenList.end() && !have("symbol",")")){
-        if (have("symbol",",")){
-            nExpressionList->addChild(new ParseTree(current()->getType(),current()->getValue()));
-            next();
-        } else {
-            nExpressionList->addChild(compileExpression());
-        }
-    }
+    // while (it != tokenList.end() && !have("symbol",")")){
+    //     if (have("symbol",",")){
+    //         nExpressionList->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //         next();
+    //     } else {
+    //         nExpressionList->addChild(compileExpression());
+    //     }
+    // }
 
     
-    return nExpressionList;
+    // return nExpressionList;
+    return NULL;
 }
 
 /**
