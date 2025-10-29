@@ -654,9 +654,10 @@ void CompilerParser::next(){
 void CompilerParser::prev(){
     int i=0;
     itNum--;
+    itNum--;
     for (Token* t : tokenList){
         if(i == itNum){
-            
+            itNum++;
             *it = t;
             return;
         }
