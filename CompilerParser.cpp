@@ -181,54 +181,54 @@ ParseTree* CompilerParser::compileSubroutine() {
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileParameterList() {
-    ParseTree* nParameterList = new ParseTree("parameterList","");
-    if (!have("keyword","int") && !have("keyword","char") && !have("keyword","boolean") && !(current()->getType() == "identifier")){
-        throw ParseException();
-        return NULL;
-    } else if (current()->getType() != "identifier") {
-        nParameterList->addChild(new ParseTree(current()->getType(),current()->getValue()));
-        next();
-    }
+    // ParseTree* nParameterList = new ParseTree("parameterList","");
+    // if (!have("keyword","int") && !have("keyword","char") && !have("keyword","boolean") && !(current()->getType() == "identifier")){
+    //     throw ParseException();
+    //     return NULL;
+    // } else if (current()->getType() != "identifier") {
+    //     nParameterList->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //     next();
+    // }
 
-    if (current()->getType() != "identifier"){
-        throw ParseException();
-        return NULL;
-    }
-    nParameterList->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next();
+    // if (current()->getType() != "identifier"){
+    //     throw ParseException();
+    //     return NULL;
+    // }
+    // nParameterList->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // next();
 
-    if (!have("symbol",",")){
-        return nParameterList;
-    }
-    nParameterList->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    next();
+    // if (!have("symbol",",")){
+    //     return nParameterList;
+    // }
+    // nParameterList->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    // next();
 
-    while (it != tokenList.end() && !have("symbol",")")){
-        if (!have("keyword","int") && !have("keyword","char") && !have("keyword","boolean") && !(current()->getType() == "identifier")){
-            throw ParseException();
-            return NULL;
-        } else if (current()->getType() != "identifier") {
-            nParameterList->addChild(new ParseTree(current()->getType(),current()->getValue()));
-            next();
-        }
+    // while (it != tokenList.end() && !have("symbol",")")){
+    //     if (!have("keyword","int") && !have("keyword","char") && !have("keyword","boolean") && !(current()->getType() == "identifier")){
+    //         throw ParseException();
+    //         return NULL;
+    //     } else if (current()->getType() != "identifier") {
+    //         nParameterList->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //         next();
+    //     }
 
-        if (current()->getType() != "identifier"){
-            throw ParseException();
-            return NULL;
-        }
-        nParameterList->addChild(new ParseTree(current()->getType(),current()->getValue()));
-        next();
+    //     if (current()->getType() != "identifier"){
+    //         throw ParseException();
+    //         return NULL;
+    //     }
+    //     nParameterList->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //     next();
 
-        if (have("symbol",",")){
-            nParameterList->addChild(new ParseTree(current()->getType(),current()->getValue()));
-            next();
-            if (have("symbol",")")){
-                throw ParseException();
-            }
-        }
-    }
+    //     if (have("symbol",",")){
+    //         nParameterList->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    //         next();
+    //         if (have("symbol",")")){
+    //             throw ParseException();
+    //         }
+    //     }
+    // }
 
-    return nParameterList;
+    // return nParameterList;
     return NULL;
 }
 
@@ -237,25 +237,25 @@ ParseTree* CompilerParser::compileParameterList() {
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileSubroutineBody() {
-    // ParseTree* nSubrutineBody = new ParseTree("subrutineBody","");
-    // nSubrutineBody->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    // next();
+    ParseTree* nSubrutineBody = new ParseTree("subrutineBody","");
+    nSubrutineBody->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    next();
 
-    // while (it != tokenList.end() && !have("symbol","}")){
-    //     if (have("keyword", "var")){
-    //         nSubrutineBody->addChild(compileVarDec());
-    //         next();
-    //     } else {
-    //         nSubrutineBody->addChild(compileStatements());
-    //     }
-    // }
+    while (it != tokenList.end() && !have("symbol","}")){
+        if (have("keyword", "var")){
+            nSubrutineBody->addChild(compileVarDec());
+            next();
+        } else {
+            nSubrutineBody->addChild(compileStatements());
+        }
+    }
 
-    // if(!have("symbol","}")){
-    //     throw ParseException();
-    //     return NULL;
-    // }
-    // nSubrutineBody->addChild(new ParseTree(current()->getType(),current()->getValue()));
-    // return nSubrutineBody;
+    if(!have("symbol","}")){
+        throw ParseException();
+        return NULL;
+    }
+    nSubrutineBody->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    return nSubrutineBody;
     return NULL;
 }
 
