@@ -50,38 +50,38 @@ ParseTree* CompilerParser::compileProgram() {
  * @return a ParseTree
  */
 ParseTree* CompilerParser::compileClass() {
-    // ParseTree* nClass = new ParseTree("Class", "");
-    // nClass->addChild(new ParseTree(current()->getType(), current()->getValue()));
-    // next();
-    // nClass->addChild(new ParseTree(current()->getType(), current()->getValue()));
-    // next();
+    ParseTree* nClass = new ParseTree("Class", "");
+    nClass->addChild(new ParseTree(current()->getType(), current()->getValue()));
+    next();
+    nClass->addChild(new ParseTree(current()->getType(), current()->getValue()));
+    next();
 
-    // if(!have("symbol","{")){
-    //     throw ParseException();
-    //     return NULL;
-    // }
-    // nClass->addChild(new ParseTree(current()->getType(), current()->getValue()));
-    // next();
+    if(!have("symbol","{")){
+        throw ParseException();
+        return NULL;
+    }
+    nClass->addChild(new ParseTree(current()->getType(), current()->getValue()));
+    next();
 
-    // while (it != tokenList.end() && !have("symbol", "}")){
-    //     if (have("keyword","function") || have("keyword","method") || have("keyword","constructor")){
-    //         nClass->addChild(compileSubroutine());
-    //     } else if (have("keyword","static") || have("keyword","field")){
-    //         nClass->addChild(compileClassVarDec());
-    //     } else {
-    //         throw ParseException();
-    //         return NULL;
-    //     }
-    //     next();
-    // }
+    while (it != tokenList.end() && !have("symbol", "}")){
+        if (have("keyword","function") || have("keyword","method") || have("keyword","constructor")){
+            nClass->addChild(compileSubroutine());
+        } else if (have("keyword","static") || have("keyword","field")){
+            nClass->addChild(compileClassVarDec());
+        } else {
+            throw ParseException();
+            return NULL;
+        }
+        next();
+    }
 
-    // if (!have("symbol", "}")){
-    //     throw ParseException();
-    //     return NULL;
-    // }
-    // nClass->addChild(new ParseTree(current()->getType(),current()->getValue()));
+    if (!have("symbol", "}")){
+        throw ParseException();
+        return NULL;
+    }
+    nClass->addChild(new ParseTree(current()->getType(),current()->getValue()));
 
-    // return nClass;
+    return nClass;
     return NULL;
 
 }
